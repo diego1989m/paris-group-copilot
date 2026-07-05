@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -59,6 +60,17 @@ export default function Home() {
             Documentation
           </a>
         </div>
+        <nav className="mt-8 flex flex-col gap-2 text-base sm:flex-row sm:gap-6">
+          <Link href="/projeto" className="font-medium text-zinc-950 underline dark:text-zinc-50">
+            Projeto
+          </Link>
+          <Link href="/hipotese" className="font-medium text-zinc-950 underline dark:text-zinc-50">
+            Hipótese
+          </Link>
+          <Link href="/decisoes" className="font-medium text-zinc-950 underline dark:text-zinc-50">
+            Decisões Técnicas
+          </Link>
+        </nav>
       </main>
     </div>
   );
