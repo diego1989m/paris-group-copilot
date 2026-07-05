@@ -3,6 +3,17 @@
 Copiloto de venture studio para discovery e execução de MVPs com IA.
 
 📄 **Documento de enquadramento do produto:** [docs/enquadramento.md](docs/enquadramento.md)
+🏗️ **Decisões de arquitetura da stack:** [docs/arquitetura.md](docs/arquitetura.md)
+
+## Rodando a stack completa
+
+```bash
+docker compose up --build
+```
+
+- Frontend (Next.js): http://localhost:3000
+- Backend (FastAPI) + contrato OpenAPI: http://localhost:8000/docs
+- Banco de dados: PostgreSQL (via Docker Compose)
 
 ---
 
