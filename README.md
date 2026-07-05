@@ -15,6 +15,13 @@ docker compose up --build
 - Backend (FastAPI) + contrato OpenAPI: http://localhost:8000/docs
 - Banco de dados: PostgreSQL (via Docker Compose)
 
+## Como contribuir
+
+1. Abra uma Issue usando o template (`.github/ISSUE_TEMPLATE/feature.md`) com problema e critério de aceitação.
+2. Crie um branch e faça as mudanças em ciclos curtos (planejar → implementar → revisar).
+3. Abra um Pull Request preenchendo o template (`.github/pull_request_template.md`) — o checklist precisa estar completo antes do merge.
+4. Registre o handoff em `docs/handoff.md` para quem for continuar o trabalho.
+
 ---
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
