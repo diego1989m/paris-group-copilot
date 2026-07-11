@@ -25,7 +25,7 @@ com Claude Code a partir de um prompt com criterios de aceitacao (Definition of 
 
 - [x] Gerar scaffold da pagina /decisoes com Claude Code (prompt com Definition of Done)
 - [x] Revisar scaffold: aceitar a adicao do Redis como status 'pendente'
-- [ ] Adicionar link/navegacao para /decisoes a partir da home
+- [x] Adicionar link/navegacao para /decisoes a partir da home
 - [ ] Testar responsividade e estados de status na UI
 
 ## Notes
