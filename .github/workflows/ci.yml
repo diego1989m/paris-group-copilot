@@ -1,0 +1,33 @@
+name: CI
+
+# Roda automaticamente em todo PR contra a main e em pushes na main.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    env:
+      # URL pública da API (default seguro para o build de CI)
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Build (next build + TypeScript)
+        run: npm run build

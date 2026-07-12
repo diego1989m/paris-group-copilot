@@ -1,14 +1,10 @@
-// Configuração central do app. Lê as variáveis de ambiente e valida.
-// Em produção, uma variável obrigatória ausente derruba o app com erro claro.
-// Em desenvolvimento, usa um fallback e avisa no console.
+// Configuração central do app.
+// - apiUrl é PÚBLICA e tem valor padrão seguro → nunca derruba o build.
+// - Segredos (databaseUrl, redisUrl) são validados SOB DEMANDA (getters):
+//   em produção, lançam erro claro se ausentes; em dev, avisam e usam fallback.
+//   Como são "lazy", o build não quebra só por importar a config.
 
-type AppConfig = {
-  apiUrl: string;
-  databaseUrl: string;
-  redisUrl: string;
-};
-
-function readEnv(name: string, fallback: string): string {
+function requireSecret(name: string, fallback: string): string {
   const value = process.env[name];
   if (value && value.length > 0) return value;
 
@@ -19,16 +15,23 @@ function readEnv(name: string, fallback: string): string {
   }
 
   console.warn(
-    `[config] ${name} não definida — usando fallback de desenvolvimento: ${fallback}`,
+    `[config] ${name} não definida — usando fallback de desenvolvimento.`,
   );
   return fallback;
 }
 
-export const config: AppConfig = {
-  apiUrl: readEnv("NEXT_PUBLIC_API_URL", "http://localhost:8000"),
-  databaseUrl: readEnv(
-    "DATABASE_URL",
-    "postgresql://postgres:postgres@localhost:5432/paris",
-  ),
-  redisUrl: readEnv("REDIS_URL", "redis://localhost:6379"),
+export const config = {
+  // Pública: sempre disponível no cliente, com default seguro.
+  apiUrl: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000",
+
+  // Segredos: validados apenas quando acessados (lazy), não no import.
+  get databaseUrl(): string {
+    return requireSecret(
+      "DATABASE_URL",
+      "postgresql://postgres:postgres@localhost:5432/paris",
+    );
+  },
+  get redisUrl(): string {
+    return requireSecret("REDIS_URL", "redis://localhost:6379");
+  },
 };
